@@ -6,6 +6,9 @@
   "tags": [],
   "targets": {
     "build": {
+      "dependsOn": [
+        "generate-types"
+      ],
       "executor": "nx:run-commands",
       "options": {
         "command": "webpack-cli build",
@@ -74,6 +77,28 @@
         "production": {
           "buildTarget": "job-auth:build:production"
         }
+      }
+    },
+    "generate-types": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "prisma generate",
+        "cwd": "apps/job-auth"
+      }
+    },
+    "migrate-prisma": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "prisma migrate dev",
+        "cwd": "apps/job-auth"
+      }
+    },
+    "studio-prisma": {
+      "continuous": true,
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "prisma studio",
+        "cwd": "apps/job-auth"
       }
     },
     "test": {

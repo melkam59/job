@@ -1,6 +1,8 @@
 const { NxAppWebpackPlugin } = require('@nx/webpack/app-plugin');
 const { join } = require('path');
 
+const prismaClientPath = join(__dirname, '../../node_modules/@prisma-clients/job-auth');
+
 module.exports = {
   output: {
     path: join(__dirname, '../../dist/apps/job-auth'),
@@ -8,6 +10,32 @@ module.exports = {
     ...(process.env.NODE_ENV !== 'production' && {
       devtoolModuleFilenameTemplate: '[absolute-resource-path]',
     }),
+  },
+  resolve: {
+    extensions: ['.ts', '.js'],
+    extensionAlias: {
+      '.js': ['.js', '.ts'],
+    },
+  },
+  module: {
+    rules: [
+      {
+        test: /\.ts$/,
+        include: [prismaClientPath],
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: true,
+              compilerOptions: {
+                module: 'commonjs',
+                target: 'es2021',
+              },
+            },
+          },
+        ],
+      },
+    ],
   },
   plugins: [
     new NxAppWebpackPlugin({
