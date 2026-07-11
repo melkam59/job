@@ -1,7 +1,7 @@
 const { NxAppWebpackPlugin } = require('@nx/webpack/app-plugin');
 const { join } = require('path');
 
-const prismaClientPath = join(__dirname, '../../node_modules/@prisma-clients/jobber-auth');
+const prismaClientPath = join(__dirname, '../../node_modules/@prisma-clients/job-auth');
 
 module.exports = {
   output: {

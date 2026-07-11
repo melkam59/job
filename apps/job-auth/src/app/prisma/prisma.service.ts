@@ -1,6 +1,6 @@
 import { Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
 import { PrismaPg } from '@prisma/adapter-pg';
-import { PrismaClient } from '@prisma-clients/jobber-auth/client';
+import { PrismaClient } from '@prisma-clients/job-auth/client';
 
 @Injectable()
 export class PrismaService
